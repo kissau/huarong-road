@@ -18,7 +18,6 @@ public abstract class AbsSearchGame<V> implements SearchGame<V>{
 		searchItems.add(initItem.hashCode());
 	
 		while(currentItems.size() > 0) {
-			//System.err.println(currentItems.size());
 			List<SearchItem<V>> nextLoopItems = new ArrayList<SearchItem<V>>();
 			for (SearchItem<V> current : currentItems) {
 				List<SearchItem<V>> nextItems = next(current);
@@ -28,7 +27,7 @@ public abstract class AbsSearchGame<V> implements SearchGame<V>{
 						long time = System.currentTimeMillis() - start;
 						System.err.println("耗时"+time);
 						return next;
-					}else if(!searchItems.contains(next.hashCode())) {
+					}else if(searchItems.lastIndexOf(next.hashCode()) == -1) {
 						nextLoopItems.add(next);
 						searchItems.add(next.hashCode());
 					}
